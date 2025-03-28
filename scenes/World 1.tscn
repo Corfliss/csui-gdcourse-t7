@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwmt6n0bqk8f3"]
+
+[ext_resource type="PackedScene" uid="uid://dw4e8a37ru2yg" path="res://Scenes/Lamp.tscn" id="1_n5s1k"]
+[ext_resource type="PackedScene" uid="uid://chwkcvwfs1fgo" path="res://Scenes/Character.tscn" id="3_ccwbo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7cfs5"]
+size = Vector3(5, 1, 6.17)
+
+[node name="World 1" type="Node3D"]
+
+[node name="Character" parent="." instance=ExtResource("3_ccwbo")]
+transform = Transform3D(0.48, 0, 0, 0, 0.48, 0, 0, 0, 0.48, 0, -0.451167, 7)
+speed = 5.0
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.53923, 3.54871)
+use_collision = true
+flip_faces = true
+size = Vector3(3.84644, 2.96115, 10.153)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.493103, 0, -3.70772)
+use_collision = true
+flip_faces = true
+size = Vector3(8.51331, 1.88269, 5.48572)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.44762, 2.79015)
+use_collision = true
+flip_faces = true
+size = Vector3(3.84644, 4.18332, 4.15792)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.415)
+use_collision = true
+flip_faces = true
+size = Vector3(1.093, 1.883, 2.221)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.77384, 1.76926)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.70921, 3.4654)
+use_collision = true
+
+[node name="Lamp" parent="." instance=ExtResource("1_n5s1k")]
+transform = Transform3D(0.305, 0, 0, 0, 0.305, 0, 0, 0, 0.305, -0.831762, -0.748762, 5.10987)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.432684, -7.84039)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.470367, 2.47002)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.432684, -8.00005)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_7cfs5")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.43923, 2.71659)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+shape = SubResource("BoxShape3D_7cfs5")
+
+[connection signal="body_entered" from="Area3D" to="Character" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Area3D2" to="Character" method="_on_area_3d_2_body_entered"]
